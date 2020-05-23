@@ -22,6 +22,12 @@ final List<RecipeWidget> recipes = [
       router.VALUE_NOTIFIER_COUNTER_APP,
       "lib/counter_app/provider_changenotifier.dart",
       ""),
+  RecipeWidget(
+      "Default CounterApp - FlutterBloc",
+      "Using flutter_bloc package for updating the counter number",
+      router.FLUTTER_BLOC_COUNTER_APP,
+      "lib/counter_app/flutter_bloc.dart",
+      ""),
 ];
 
 class Home extends StatefulWidget {
