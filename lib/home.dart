@@ -16,6 +16,12 @@ final List<RecipeWidget> recipes = [
       router.VALUE_NOTIFIER_COUNTER_APP,
       "lib/counter_app/value_notifier.dart",
       ""),
+  RecipeWidget(
+      "Default CounterApp - Provider + ChangeNotifier",
+      "Using Provider package with ChangeNotifier for updating the counter number",
+      router.VALUE_NOTIFIER_COUNTER_APP,
+      "lib/counter_app/provider_changenotifier.dart",
+      ""),
 ];
 
 class Home extends StatefulWidget {

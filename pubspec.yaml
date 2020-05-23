@@ -34,6 +34,9 @@ dependencies:
   syntax_highlighter: ^0.1.0
   animated_floatactionbuttons: ^0.1.0
 
+  #Provider package
+  provider: ^4.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

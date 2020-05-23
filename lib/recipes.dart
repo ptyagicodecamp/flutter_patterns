@@ -4,11 +4,11 @@ import 'package:flutterpatterns/screen_args.dart';
 import 'router.dart' as router;
 
 class RecipeWidget extends StatelessWidget {
-  String name;
-  String description;
-  String pageName;
-  String codeFilePath;
-  String codeGithubPath;
+  final String name;
+  final String description;
+  final String pageName;
+  final String codeFilePath;
+  final String codeGithubPath;
 
   RecipeWidget(this.name, this.description, this.pageName, this.codeFilePath,
       this.codeGithubPath);
