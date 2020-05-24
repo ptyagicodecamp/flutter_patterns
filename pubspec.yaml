@@ -40,6 +40,10 @@ dependencies:
   #flutter_bloc package
   flutter_bloc: ^4.0.0
 
+  #Redux packages
+  flutter_redux: ^0.6.0
+  redux: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

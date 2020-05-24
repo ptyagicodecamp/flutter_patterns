@@ -3,9 +3,11 @@ import 'package:flutterpatterns/counter_app/flutter_bloc.dart';
 import 'package:flutterpatterns/counter_app/vanilla.dart';
 import 'package:flutterpatterns/screen_args.dart';
 import 'package:provider/provider.dart';
+import 'package:redux/redux.dart';
 
 import 'codefile.dart';
 import 'counter_app/provider_changenotifier.dart';
+import 'counter_app/redux.dart';
 import 'counter_app/value_notifier.dart';
 import 'home.dart';
 import 'unknown.dart';
@@ -15,7 +17,8 @@ const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
 const String VANILLA_COUNTER_APP = 'VANILLA_COUNTER_APP';
 const String VALUE_NOTIFIER_COUNTER_APP = 'VALUE_NOTIFIER_COUNTER_APP';
 const String CHANGE_NOTIFIER_COUNTER_APP = 'CHANGE_NOTIFIER_COUNTER_APP';
-const String FLUTTER_BLOC_COUNTER_APP = 'FLUTTER_BLOC_COUNTER_APP';
+const String BLOC_COUNTER_APP = 'BLOC_COUNTER_APP';
+const String REDUX_COUNTER_APP = 'REDUX_COUNTER_APP';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -47,8 +50,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
       break;
 
-    case FLUTTER_BLOC_COUNTER_APP:
+    case BLOC_COUNTER_APP:
       return MaterialPageRoute(builder: (context) => FlutterBlocCounterApp());
+      break;
+
+    case REDUX_COUNTER_APP:
+      return MaterialPageRoute(builder: (context) {
+        final Store<int> store = Store<int>(reducer, initialState: 0);
+        return ReduxCounterApp(store);
+      });
+
       break;
 
     case SHOW_CODE_FILE:

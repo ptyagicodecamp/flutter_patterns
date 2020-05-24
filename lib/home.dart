@@ -25,8 +25,14 @@ final List<RecipeWidget> recipes = [
   RecipeWidget(
       "Default CounterApp - FlutterBloc",
       "Using flutter_bloc package for updating the counter number",
-      router.FLUTTER_BLOC_COUNTER_APP,
+      router.BLOC_COUNTER_APP,
       "lib/counter_app/flutter_bloc.dart",
+      ""),
+  RecipeWidget(
+      "Default CounterApp - FlutterRedux",
+      "Using flutter_redux package for updating the counter number",
+      router.REDUX_COUNTER_APP,
+      "lib/counter_app/redux.dart",
       ""),
 ];
 
