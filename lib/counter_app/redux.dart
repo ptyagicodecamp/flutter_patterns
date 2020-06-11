@@ -10,6 +10,7 @@ import 'package:redux/redux.dart';
 enum CounterAction { increment }
 
 //Reducer can be defined in a separate class: reducer.dart
+//Converts from one state to another state
 int reducer(int prevState, dynamic action) {
   if (action == CounterAction.increment) {
     prevState = prevState + 1;
