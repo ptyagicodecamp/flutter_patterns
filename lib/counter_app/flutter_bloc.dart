@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 //https://bloclibrary.dev/#/fluttercountertutorial
 
-//void main() {
-//  runApp(FlutterBlocCounterApp());
-//}
+void main() {
+  runApp(FlutterBlocCounterApp());
+}
 
 enum CounterEvent { increment }
 
@@ -50,32 +50,33 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
+    final CounterBloc _counterBloc = CounterBloc();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
       ),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (context, count) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            BlocBuilder<CounterBloc, int>(
+              bloc: _counterBloc,
+              builder: (context, count) {
+                return Text(
                   '$count',
                   style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ),
-          );
-        },
+                );
+              },
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => counterBloc.add(CounterEvent.increment),
+        onPressed: () => _counterBloc.add(CounterEvent.increment),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
