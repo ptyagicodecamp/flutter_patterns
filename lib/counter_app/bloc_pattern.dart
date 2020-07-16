@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -30,14 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   final _bloc = CounterBloc();
-
-//  void _incrementCounter() {
-//    setState(() {
-//      _counter++;
-//    });
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
+            //#6: StreamBuilder builds the Text widget based on new state received from _bloc's StateController's stream
             StreamBuilder(
               stream: _bloc.counter,
               initialData: 0,
@@ -66,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        //#1: Events added to eventController's sink
         onPressed: () => _bloc.eventSink.add(CounterEvent.increment),
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -85,13 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
 enum CounterEvent { increment }
 
 class CounterBloc {
+  //#0: Setting up event and state controllers and their sink and streams
+  //This is state of the counter
   int _counter = 0;
+
   //Controller for State
   final _stateController = StreamController<int>();
-
   //State stream's Sink to add states into
   StreamSink<int> get _stateSink => _stateController.sink;
 
+  //#5: StateController's stream is providing the updated state(s)
   //Stream of states. public
   Stream<int> get counter => _stateController.stream;
 
@@ -99,22 +98,25 @@ class CounterBloc {
   final _eventController = StreamController<CounterEvent>();
   Sink<CounterEvent> get eventSink => _eventController.sink;
 
+  //#2: Event controller's stream is listening to the events and feeding into eventToState mapper
   //Listening to incoming UI events and mapping them into corresponding output States
   CounterBloc() {
-//    _eventController.stream.listen(
-//      (event) {
-//        _mapEventToState(event);
-//      },
-//    );
+    _eventController.stream.listen(
+      (event) {
+        _mapEventToState(event);
+      },
+    );
 
     //shorthand
-    _eventController.stream.listen(_mapEventToState);
+    //_eventController.stream.listen(_mapEventToState);
   }
 
+  //#3: Mapping events to their corresponding state based on the business logic
   void _mapEventToState(CounterEvent event) {
     //Increment counter if event is matched
     if (event == CounterEvent.increment) _counter++;
 
+    //#4: Adding newly formed state is added into State controller's sink
     //update the _counter value into stateController's sink (_stateSink)
     _stateSink.add(_counter);
   }
